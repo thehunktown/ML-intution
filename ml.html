@@ -267,8 +267,7 @@
           <li><strong>Mean Absolute Error (MAE):</strong> Average of absolute differences between predicted and true values (easy to interpret).</li>
           <li><strong>Mean Squared Error (MSE):</strong> Average of squared differences (penalizes larger errors more heavily).</li>
           <li><strong>Root Mean Squared Error (RMSE):</strong> Square root of MSE (interpreted in same unit as target variable).</li>
-          <li><strong>R<sup>2</sup> Score (Coefficient of Determination):</strong> Proportion of variance in target variable explained by model (closer to 1 = better).</li>           <li><strong>R<sup>2</sup> Score (Coefficient of Determination):</strong> Proportion of variance in target variable explained by model (closer to 1 = better).</li> eg: If a student studies for 5 hours, they’ll likely score 70.
-
+          <li><strong>R<sup>2</sup> Score (Coefficient of Determination):</strong> Proportion of variance in target variable explained by model (closer to 1 = better).</li> eg: If a student studies for 5 hours, they’ll likely score 70.
         </ul>
       </li>
     </ul>
@@ -299,17 +298,34 @@
                 <li>✅ <strong>Useful When:</strong> Data is linearly separable or simple relationship exists.</li>
                 <li>✅ <strong>Real-world Use:</strong> Customer churn prediction.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "Simple linear boundary with probability twist."</li>
+            
+                <li>✅ <strong>Visual Intuition:</strong>
+                  <div style="margin-top: 10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                    Input: [x₁, x₂] ➝ w₁·x₁ + w₂·x₂ + b ➝ z<br>
+                    Apply Sigmoid:<br>
+                    sigmoid(z) = 1 / (1 + e⁻ᶻ)<br><br>
+            
+                    Example Output:<br>
+                    Probability = 0.82 ➝ Predict class 1 ✔️<br><br>
+            
+                    ✅ Decision boundary = linear<br>
+                    ✅ Output = probability [0, 1]
+                  </div>
+                  <p style="font-size: 14px;">➡️ Logistic regression draws a straight line, but interprets output as a probability instead of raw label.</p>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>from sklearn.linear_model import LogisticRegression
-    X, y = ...  # your data
-    model = LogisticRegression()
-    model.fit(X, y)
-    y_pred = model.predict(X)
+            
+            X, y = ...  # your data
+            model = LogisticRegression()
+            model.fit(X, y)
+            y_pred = model.predict(X)
                   </code></pre>
                 </li>
               </ul>
             </li>
-    
+            
             <li><strong>Support Vector Machine (SVM)</strong>
               <ul>
                 <li>✅ <strong>Simple Definition:</strong> Finds the hyperplane that best separates two classes with maximum margin.</li>
@@ -317,21 +333,35 @@
                 <li>✅ <strong>Useful When:</strong> High-dimensional data, clear class separation needed.</li>
                 <li>✅ <strong>Real-world Use:</strong> Spam vs non-spam email classification.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "Find widest street between classes."</li>
+            
+                <li>✅ <strong>Visual Intuition:</strong>
+                  <div style="margin-top: 10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                    Class A: ● ● ●          Decision Boundary          ○ ○ ○ : Class B<br>
+                                |<-- margin -->|<-- margin -->|<br>
+                                    ←—— SVM Hyperplane ——→<br><br>
+            
+                    ✅ Support vectors = boundary-defining samples<br>
+                    ✅ Margin = widest possible space between classes
+                  </div>
+                  <p style="font-size: 14px;">➡️ SVM looks for the optimal hyperplane that cleanly separates classes with the largest possible buffer.</p>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>from sklearn.svm import SVC
-    X, y = ...  # your data
-    model = SVC(kernel='linear')
-    model.fit(X, y)
-    y_pred = model.predict(X)
+            
+            X, y = ...  # your data
+            model = SVC(kernel='linear')
+            model.fit(X, y)
+            y_pred = model.predict(X)
                   </code></pre>
                 </li>
               </ul>
             </li>
-    
+            
             <li><strong>Decision Tree, Random Forest, Extra Trees</strong>
               <ul>
                 <li>✅ <strong>Simple Definition:</strong> Tree-based models split data into branches based on feature conditions to classify inputs.</li>
-                <li>✅ <strong>How it Works:</strong> 
+                <li>✅ <strong>How it Works:</strong>
                   <ul>
                     <li><strong>Decision Tree:</strong> Single tree built by splitting on features.</li>
                     <li><strong>Random Forest:</strong> Ensemble of trees using bagging (bootstrap sampling).</li>
@@ -341,17 +371,41 @@
                 <li>✅ <strong>Useful When:</strong> Data is complex, nonlinear, with many features.</li>
                 <li>✅ <strong>Real-world Use:</strong> Loan default prediction, risk modeling.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "If-Else splitting trees."</li>
+            
+                <li>✅ <strong>Visual Intuition:</strong>
+                  <div style="margin-top:10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                    🧠 Decision Tree Example:<br>
+                    IF income &lt; 50K:<br>
+                    &nbsp;&nbsp;➝ IF age &lt; 30: ➝ Class A<br>
+                    &nbsp;&nbsp;➝ ELSE: ➝ Class B<br>
+                    ELSE:<br>
+                    &nbsp;&nbsp;➝ Class C<br><br>
+            
+                    🌲 Random Forest:<br>
+                    - Build multiple decision trees<br>
+                    - Each tree trained on random subset of data & features<br>
+                    - Final prediction = Majority vote of trees<br><br>
+            
+                    🎲 Extra Trees:<br>
+                    - Like Random Forest<br>
+                    - But splits chosen completely at random<br>
+                    - Even faster, less overfitting in some cases
+                  </div>
+                  <p style="font-size: 14px;">➡️ Trees split using feature conditions. Ensembles improve generalization by combining multiple trees and randomness.</p>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>from sklearn.ensemble import RandomForestClassifier
-    X, y = ...  # your data
-    model = RandomForestClassifier()
-    model.fit(X, y)
-    y_pred = model.predict(X)
+            
+            X, y = ...  # your data
+            model = RandomForestClassifier()
+            model.fit(X, y)
+            y_pred = model.predict(X)
                   </code></pre>
                 </li>
               </ul>
             </li>
-    
+            
             <li><strong>Gradient Boosting Classifier (XGBoost, LightGBM, CatBoost)</strong>
               <ul>
                 <li>✅ <strong>Simple Definition:</strong> Ensemble of trees built sequentially where each new tree corrects errors made by the previous one.</li>
@@ -359,16 +413,34 @@
                 <li>✅ <strong>Useful When:</strong> Tabular data with complex relationships, high accuracy needed.</li>
                 <li>✅ <strong>Real-world Use:</strong> Credit scoring, disease diagnosis prediction.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "Fix mistakes one tree at a time."</li>
+            
+                <li>✅ <strong>Visual Intuition:</strong>
+                  <div style="margin-top:10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                    🔁 Boosting Flow:<br>
+                    Tree 1 ➝ Predicts initial label (wrong for 40%)<br>
+                    Tree 2 ➝ Learns residuals (fixes Tree 1 errors)<br>
+                    Tree 3 ➝ Refines the remaining hard cases<br>
+                    ...<br>
+                    Final prediction = Sum of all tree outputs<br><br>
+            
+                    ✔️ Each tree learns from the mistakes of the previous<br>
+                    ✔️ Gradually boosts accuracy over iterations
+                  </div>
+                  <p style="font-size: 14px;">➡️ Boosting adds trees sequentially to fix what earlier ones missed. Great for hard-to-learn patterns in structured data.</p>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>from xgboost import XGBClassifier
-    X, y = ...  # your data
-    model = XGBClassifier()
-    model.fit(X, y)
-    y_pred = model.predict(X)
+            
+            X, y = ...  # your data
+            model = XGBClassifier()
+            model.fit(X, y)
+            y_pred = model.predict(X)
                   </code></pre>
                 </li>
               </ul>
             </li>
+            
     
             <li><strong>Naïve Bayes (Gaussian, Bernoulli)</strong>
               <ul>
@@ -377,42 +449,69 @@
                 <li>✅ <strong>Useful When:</strong> Text classification, spam filtering.</li>
                 <li>✅ <strong>Real-world Use:</strong> Email spam detection, sentiment analysis.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "Probability model assuming independence."</li>
+            
+                <li>✅ <strong>Visual Intuition:</strong>
+                  <div style="font-family: monospace; font-size: 15px; line-height: 1.8;">
+                    Input: "cheap offer now"<br><br>
+                    ➤ Class Probabilities:<br>
+                    P(Spam | text) = 0.91 ✔️<br>
+                    P(Not-Spam | text) = 0.09<br><br>
+                    ➤ Naïve Bayes calculates:<br>
+                    P(class) × P(word₁|class) × P(word₂|class) × ...<br>
+                    (Assumes words are independent given class)
+                  </div>
+                  <p style="font-size: 14px;">➡️ Naïve Bayes is fast, interpretable, and powerful on bag-of-words problems like spam filtering.</p>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>from sklearn.naive_bayes import GaussianNB
-    X, y = ...  # your data
-    model = GaussianNB()
-    model.fit(X, y)
-    y_pred = model.predict(X)
+            
+            X, y = ...  # your data
+            model = GaussianNB()
+            model.fit(X, y)
+            y_pred = model.predict(X)
                   </code></pre>
                 </li>
               </ul>
             </li>
-    
-            <li><strong>Neural Networks (MLP, CNNs for images, RNNs/Transformers for sequences)</strong>
+            
+            <li><strong>Neural Networks (MLP, CNNs, RNNs/Transformers)</strong>
               <ul>
                 <li>✅ <strong>Simple Definition:</strong> Deep learning models that automatically learn complex features and decision boundaries.</li>
                 <li>✅ <strong>How it Works:</strong> Layers of neurons compute weighted sums and activation functions to make final prediction.</li>
                 <li>✅ <strong>Useful When:</strong> Images, text, sequential data.</li>
                 <li>✅ <strong>Real-world Use:</strong> Cat vs dog image classification, sentiment classification from text.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "Stacked layers learning hidden features."</li>
+            
+                <li>✅ <strong>Visual Intuition:</strong>
+                  <div style="font-family: monospace; font-size: 15px; line-height: 1.8;">
+                    Input: [pixels] or [word embeddings]<br>
+                    ➝ Dense ➝ ReLU ➝ Dense ➝ Sigmoid<br><br>
+                    Output: 0.94 → Class = 1 ✔️<br><br>
+                    🧠 Learns nonlinear patterns layer by layer<br>
+                    📦 Great for unstructured data (image, text, sound)
+                  </div>
+                  <p style="font-size: 14px;">➡️ Deep networks uncover hidden structure and high-dimensional representations automatically.</p>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>import tensorflow as tf
-    from tensorflow.keras import layers
-    
-    X, y = ...  # your data
-    
-    model = tf.keras.Sequential([
-        layers.Dense(64, activation='relu', input_shape=(X.shape[1],)),
-        layers.Dense(1, activation='sigmoid')
-    ])
-    
-    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-    model.fit(X, y, epochs=10, batch_size=32)
+            from tensorflow.keras import layers
+            
+            X, y = ...  # your data
+            
+            model = tf.keras.Sequential([
+                layers.Dense(64, activation='relu', input_shape=(X.shape[1],)),
+                layers.Dense(1, activation='sigmoid')
+            ])
+            
+            model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+            model.fit(X, y, epochs=10, batch_size=32)
                   </code></pre>
                 </li>
               </ul>
             </li>
-    
+            
             <li><strong>K-Nearest Neighbors (KNN)</strong>
               <ul>
                 <li>✅ <strong>Simple Definition:</strong> Classifies a data point based on the majority label among its K nearest neighbors.</li>
@@ -420,16 +519,35 @@
                 <li>✅ <strong>Useful When:</strong> Small datasets, low-dimensional data.</li>
                 <li>✅ <strong>Real-world Use:</strong> Recommender systems, anomaly detection.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "Classify based on nearby friends."</li>
+            
+                <li>✅ <strong>Visual Intuition:</strong>
+                  <div style="font-family: monospace; font-size: 15px; line-height: 1.8;">
+                    Query Point: ❓<br><br>
+                    Nearby:<br>
+                    🟢 Class A<br>
+                    🔴 Class B<br>
+                    🟢 Class A<br>
+                    🟢 Class A<br>
+                    🔴 Class B<br><br>
+                    ➤ Votes:<br>
+                    A = 3, B = 2<br>
+                    ✅ Predict Class = A ✔️
+                  </div>
+                  <p style="font-size: 14px;">➡️ KNN is intuitive and works well when similar inputs yield similar outputs — no training phase required.</p>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>from sklearn.neighbors import KNeighborsClassifier
-    X, y = ...  # your data
-    model = KNeighborsClassifier(n_neighbors=5)
-    model.fit(X, y)
-    y_pred = model.predict(X)
+            
+            X, y = ...  # your data
+            model = KNeighborsClassifier(n_neighbors=5)
+            model.fit(X, y)
+            y_pred = model.predict(X)
                   </code></pre>
                 </li>
               </ul>
             </li>
+            
          
           </ul>
         </li>
@@ -470,17 +588,45 @@
               <li>✅ <strong>Useful When:</strong> Simple, linearly separable multi-class problems.</li>
               <li>✅ <strong>Real-world Use:</strong> Handwritten digit recognition (0-9).</li>
               <li>✅ <strong>Easy to Remember Tip:</strong> "Softmax chooses the highest score."</li>
+          
+              <li>✅ <strong>Visual Intuition (HTML Flow):</strong>
+                <div style="margin-top: 10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                  Sample Input (Features):<br>
+                  ➝ [pixel_1, pixel_2, ..., pixel_784]<br><br>
+          
+                  Class Probabilities from Softmax:<br>
+                  ➝ Class 0: 0.01<br>
+                  ➝ Class 1: 0.02<br>
+                  ➝ Class 2: 0.90  ✅ (chosen)<br>
+                  ➝ Class 3: 0.05<br>
+                  ➝ ...<br><br>
+          
+                  Decision:<br>
+                  ➝ Predict Class: <strong>2</strong> ✔️ (highest softmax score)
+                </div>
+                <p style="font-size: 14px;">➡️ Multinomial Logistic Regression outputs a probability distribution across all classes, and selects the class with the highest probability.</p>
+              </li>
+          
               <li>✅ <strong>Python Code:</strong>
                 <pre><code>from sklearn.linear_model import LogisticRegression
-  X, y = ...  # your data
-  model = LogisticRegression(multi_class='multinomial', solver='lbfgs')
-  model.fit(X, y)
-  y_pred = model.predict(X)
+          
+          # Load your feature matrix X and target labels y
+          X, y = ...  # e.g., digits dataset
+          
+          # Use multinomial strategy with softmax
+          model = LogisticRegression(multi_class='multinomial', solver='lbfgs')
+          model.fit(X, y)
+          
+          # Predict classes
+          y_pred = model.predict(X)
+          
+          # (Optional) Predict probability distribution
+          y_proba = model.predict_proba(X)
                 </code></pre>
               </li>
             </ul>
           </li>
-
+          
           <li><strong>Decision Tree, Random Forest, Extra Trees</strong>
             <ul>
               <li>✅ <strong>Simple Definition:</strong> Tree models handle multi-class natively by splitting data based on feature conditions until a pure class is found.</li>
@@ -488,17 +634,35 @@
               <li>✅ <strong>Useful When:</strong> Complex, nonlinear decision boundaries.</li>
               <li>✅ <strong>Real-world Use:</strong> Classifying types of plants or customer personas.</li>
               <li>✅ <strong>Easy to Remember Tip:</strong> "If-else paths leading to one class."</li>
+          
+              <li>✅ <strong>Visual Intuition (HTML Flow):</strong>
+                <div style="margin-top: 10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                  Decision Tree Structure:<br><br>
+                  ➤ IF PetalLength &lt; 2.5 ➝ Class = Setosa<br>
+                  └── ELSE IF PetalWidth &lt; 1.8 ➝ Class = Versicolor<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── ELSE ➝ Class = Virginica<br><br>
+          
+                  🧠 Each internal node ➝ condition on feature<br>
+                  🌿 Each leaf ➝ predicted class<br>
+                  🌲 Random Forest = many such trees voting together
+                </div>
+                <p style="font-size: 14px;">➡️ Decision Trees follow a chain of rules, ending in a class. Random Forest uses many such trees and averages their decisions for better generalization.</p>
+              </li>
+          
               <li>✅ <strong>Python Code:</strong>
                 <pre><code>from sklearn.ensemble import RandomForestClassifier
-  X, y = ...  # your data
-  model = RandomForestClassifier()
-  model.fit(X, y)
-  y_pred = model.predict(X)
+          
+          X, y = ...  # your dataset
+          model = RandomForestClassifier()
+          model.fit(X, y)
+          
+          # Predict class
+          y_pred = model.predict(X)
                 </code></pre>
               </li>
             </ul>
           </li>
-
+          
           <li><strong>Gradient Boosting Classifier (XGBoost, LightGBM, CatBoost)</strong>
             <ul>
               <li>✅ <strong>Simple Definition:</strong> Boosted trees trained sequentially to predict multiple classes using softmax or log loss adaptations.</li>
@@ -506,17 +670,35 @@
               <li>✅ <strong>Useful When:</strong> Highly accurate multi-class classification needed on structured data.</li>
               <li>✅ <strong>Real-world Use:</strong> Multi-class insurance claim classification, disease categorization.</li>
               <li>✅ <strong>Easy to Remember Tip:</strong> "Correcting mistakes across classes, one tree at a time."</li>
+          
+              <li>✅ <strong>Visual Intuition (HTML Flow):</strong>
+                <div style="margin-top:10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                  🔁 Boosting Flow:<br>
+                  ┌── Tree 1 ➝ Predicts class (Cat = 0.6, Dog = 0.3, Fox = 0.1)<br>
+                  ├── Tree 2 ➝ Corrects: Fox was underpredicted<br>
+                  ├── Tree 3 ➝ Focuses on confused Dog vs. Cat cases<br>
+                  └── ... Final Prediction = Combined weighted output of all trees<br><br>
+          
+                  🧠 Each tree learns from the residual (error) of previous predictions<br>
+                  📈 Boosting improves accuracy by targeting hard-to-classify samples!
+                </div>
+                <p style="font-size: 14px;">➡️ Boosted trees work like a team: each one learns what the previous ones missed, leading to strong multi-class predictions.</p>
+              </li>
+          
               <li>✅ <strong>Python Code:</strong>
                 <pre><code>from xgboost import XGBClassifier
-  X, y = ...  # your data
-  model = XGBClassifier(objective='multi:softmax', num_class=3)
-  model.fit(X, y)
-  y_pred = model.predict(X)
+          
+          # Assume your data X and multi-class labels y
+          model = XGBClassifier(objective='multi:softmax', num_class=3)
+          model.fit(X, y)
+          
+          # Predict class
+          y_pred = model.predict(X)
                 </code></pre>
               </li>
             </ul>
           </li>
-
+          
           <li><strong>Naïve Bayes (Multinomial, Complement)</strong>
             <ul>
               <li>✅ <strong>Simple Definition:</strong> Probabilistic model that assumes features are conditionally independent given the class label.</li>
@@ -524,17 +706,38 @@
               <li>✅ <strong>Useful When:</strong> Text classification with bag-of-words (e.g., topic labeling).</li>
               <li>✅ <strong>Real-world Use:</strong> News article topic classification.</li>
               <li>✅ <strong>Easy to Remember Tip:</strong> "Highest probability wins."</li>
+          
+              <li>✅ <strong>Visual Intuition (HTML Flow):</strong>
+                <div style="margin-top:10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                  Input (Bag of Words):<br>
+                  [ "economy", "tax", "inflation" ]<br><br>
+          
+                  Calculate Class Probabilities:<br>
+                  P(Business | input) = 0.60<br>
+                  P(Politics | input) = 0.30<br>
+                  P(Sports   | input) = 0.10<br><br>
+          
+                  ✅ Predict = <strong>Business</strong> (highest score)<br><br>
+          
+                  🤔 It’s called “Naïve” because it assumes:<br>
+                  ➝ P(word1, word2 | class) = P(word1|class) * P(word2|class) ...
+                </div>
+                <p style="font-size: 14px;">➡️ Naïve Bayes works well when features (like words) are treated independently. Great for high-speed, low-resource text classification tasks.</p>
+              </li>
+          
               <li>✅ <strong>Python Code:</strong>
                 <pre><code>from sklearn.naive_bayes import MultinomialNB
-  X, y = ...  # your data
-  model = MultinomialNB()
-  model.fit(X, y)
-  y_pred = model.predict(X)
+          
+          X, y = ...  # your bag-of-words or TF-IDF data
+          model = MultinomialNB()
+          model.fit(X, y)
+          
+          y_pred = model.predict(X)
                 </code></pre>
               </li>
             </ul>
           </li>
-
+          
           <li><strong>Neural Networks (MLP, CNNs, Transformers)</strong>
             <ul>
               <li>✅ <strong>Simple Definition:</strong> Deep learning models that output probability distributions across multiple classes using softmax activation.</li>
@@ -542,24 +745,41 @@
               <li>✅ <strong>Useful When:</strong> Images, text, sequential multi-class tasks.</li>
               <li>✅ <strong>Real-world Use:</strong> ImageNet classification, document categorization, question answering tasks.</li>
               <li>✅ <strong>Easy to Remember Tip:</strong> "Stacked layers leading to a softmax winner."</li>
+          
+              <li>✅ <strong>Visual Intuition:</strong>
+                <div style="margin-top: 10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                  Input Features:<br>
+                  [Word1, Word2, Word3] or [Pixel1, Pixel2, ...]<br><br>
+          
+                  Hidden Layers:<br>
+                  ➝ Dense ➝ Dense ➝ Dense<br><br>
+          
+                  Output Layer:<br>
+                  ➝ Softmax → [Class A: 0.1, Class B: 0.8, Class C: 0.1]<br><br>
+          
+                  ✅ Final Prediction = <strong>Class B</strong> ✔️
+                </div>
+                <p style="font-size: 14px;">➡️ Neural networks extract deep patterns, then softmax picks the class with the highest score.</p>
+              </li>
+          
               <li>✅ <strong>Python Code:</strong>
                 <pre><code>import tensorflow as tf
-  from tensorflow.keras import layers
-
-  X, y = ...  # your data
-  model = tf.keras.Sequential([
-      layers.Dense(128, activation='relu', input_shape=(X.shape[1],)),
-      layers.Dense(64, activation='relu'),
-      layers.Dense(3, activation='softmax')  # 3 classes
-  ])
-
-  model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-  model.fit(X, y, epochs=10, batch_size=32)
+          from tensorflow.keras import layers
+          
+          X, y = ...  # your data
+          model = tf.keras.Sequential([
+              layers.Dense(128, activation='relu', input_shape=(X.shape[1],)),
+              layers.Dense(64, activation='relu'),
+              layers.Dense(3, activation='softmax')  # 3 classes
+          ])
+          
+          model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+          model.fit(X, y, epochs=10, batch_size=32)
                 </code></pre>
               </li>
             </ul>
           </li>
-
+          
           <li><strong>K-Nearest Neighbors (KNN)</strong>
             <ul>
               <li>✅ <strong>Simple Definition:</strong> Classifies a new point based on the majority label among its K nearest neighbors for multiple classes.</li>
@@ -567,16 +787,35 @@
               <li>✅ <strong>Useful When:</strong> Small datasets, simple multi-class problems.</li>
               <li>✅ <strong>Real-world Use:</strong> Multi-class image recognition, recommendation systems.</li>
               <li>✅ <strong>Easy to Remember Tip:</strong> "Friends help you choose class."</li>
+          
+              <li>✅ <strong>Visual Intuition:</strong>
+                <div style="margin-top: 10px; font-family: monospace; font-size: 15px; line-height: 1.8;">
+                  New Data Point: ❓<br><br>
+          
+                  Closest Neighbors:<br>
+                  🟢 (Class A), 🔴 (Class B), 🟢 (Class A), 🔴 (Class B), 🟢 (Class A)<br><br>
+          
+                  Voting:<br>
+                  Class A = 3 votes ✅<br>
+                  Class B = 2 votes<br><br>
+          
+                  ✅ Final Prediction = <strong>Class A</strong> ✔️
+                </div>
+                <p style="font-size: 14px;">➡️ KNN relies entirely on nearby examples — it learns nothing beforehand but classifies on the fly!</p>
+              </li>
+          
               <li>✅ <strong>Python Code:</strong>
                 <pre><code>from sklearn.neighbors import KNeighborsClassifier
-  X, y = ...  # your data
-  model = KNeighborsClassifier(n_neighbors=5)
-  model.fit(X, y)
-  y_pred = model.predict(X)
+          
+          X, y = ...  # your data
+          model = KNeighborsClassifier(n_neighbors=5)
+          model.fit(X, y)
+          y_pred = model.predict(X)
                 </code></pre>
               </li>
             </ul>
           </li>
+          
        
         </ul>
       </li>
