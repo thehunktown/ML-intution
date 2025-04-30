@@ -429,6 +429,60 @@
                   <p style="font-size: 14px;">➡️ Boosting adds trees sequentially to fix what earlier ones missed. Great for hard-to-learn patterns in structured data.</p>
                 </li>
             
+                <li>✅ <strong>XGBoost (Extreme Gradient Boosting)</strong>
+                  <ul>
+                    <li>🚀 <strong>Optimized for speed + performance</strong> (uses histogram-based approximation, regularization)</li>
+                    <li>XGBoost stands for Extreme Gradient Boosting.
+                      It builds trees one after another, where each tree fixes the mistakes of the previous ones.
+                      It’s fast, regularized, and handles missing values well.</li>
+                    <li>📦 Works best on: tabular data, competitions, Kaggle-style datasets</li>
+                    <li>✅ Includes built-in cross-validation, pruning, missing value handling</li>
+                    <li><strong>Visual Flow:</strong>
+                      <div style="font-family: monospace; font-size: 15px;">
+                        Input ➝ Tree 1<br>
+                        Residuals ➝ Tree 2<br>
+                        Residuals ➝ Tree 3<br>
+                        🔁 Regularization keeps trees simple<br>
+                        📈 Final prediction = weighted sum of all
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+            
+                <li>✅ <strong>LightGBM (Light Gradient Boosting Machine)</strong>
+                  <ul>
+                    <li>⚡ <strong>Fastest training on large datasets</strong> (leaf-wise tree growth, histogram binning)</li>
+                    <li>LightGBM is a faster gradient boosting framework developed by Microsoft.
+                      It uses leaf-wise tree growth and histogram-based splitting, which makes it extremely fast and memory-efficient — perfect for big datasets.</li>
+                    <li>📊 Handles large features/rows extremely efficiently</li>
+                    <li>🌿 Splits best leaf first, may overfit small data → use with care</li>
+                    <li><strong>Visual Flow:</strong>
+                      <div style="font-family: monospace; font-size: 15px;">
+                        Full Data ➝ Find best leaf<br>
+                        ➝ Grow one-sided trees (deep but sparse)<br>
+                        ➝ Faster than XGBoost on big data
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+            
+                <li>✅ <strong>CatBoost (Categorical Boosting)</strong>
+                  <ul>
+                    <li>😺 <strong>Best choice for categorical data</strong> — no need to one-hot encode</li>
+                    <li>CatBoost is designed for datasets with a lot of categorical features.
+                      It handles text and categories automatically without one-hot encoding and uses a smart technique called ordered boosting to reduce overfitting.</li>
+                    <li>🔐 Handles ordered boosting to reduce overfitting</li>
+                    <li>🌈 Works well with text, category + numerical mix</li>
+                    <li><strong>Visual Flow:</strong>
+                      <div style="font-family: monospace; font-size: 15px;">
+                        Raw features ➝ Encode categorical columns<br>
+                        ➝ Apply ordered boosting<br>
+                        ➝ Combine predictions with residual learning
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+            
                 <li>✅ <strong>Python Code:</strong>
                   <pre><code>from xgboost import XGBClassifier
             
@@ -449,7 +503,15 @@
                 <li>✅ <strong>Useful When:</strong> Text classification, spam filtering.</li>
                 <li>✅ <strong>Real-world Use:</strong> Email spam detection, sentiment analysis.</li>
                 <li>✅ <strong>Easy to Remember Tip:</strong> "Probability model assuming independence."</li>
-            
+                
+                There’s a city where:
+
+                1% log criminals hote hain (i.e., P(Criminal) = 0.01)
+                
+                Ek special AI Face Scanner hai, jo agar koi criminal ho, to 99% accurate detect karta hai (P(Positive | Criminal) = 0.99)
+                
+                Lekin agar koi innocent ho, to bhi 5% cases mein galti se criminal bol deta hai (false positive) (P(Positive | Innocent) = 0.05)
+
                 <li>✅ <strong>Visual Intuition:</strong>
                   <div style="font-family: monospace; font-size: 15px; line-height: 1.8;">
                     Input: "cheap offer now"<br><br>
